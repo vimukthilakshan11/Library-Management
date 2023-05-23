@@ -69,22 +69,53 @@ if(isset($_POST['addBookBTN'])){
 
    $status = $_POST['gridRadios'];
 
-if($bookName == null || $author ==null){
-  echo "<script type='text/javascript'>
 
-  window.alert('Nothing to add')
 
-  </script>";
-}else{
+   if($bookName == null || $author ==null){
+    echo "<script type='text/javascript'>
+  
+    window.alert('Nothing to add')
+  
+    </script>";
+  }else{
 
-$db = new dbconnect();
+
+   $db = new dbconnect();
+
+   $query1 = "SELECT `bookName`, `author` FROM `book` WHERE `bookName` = '".$bookName."' AND `author` = '".$author."' AND `status` = '1'";
+   $result1 = $db->getfromdb($query1);
+   $resultCheck1 = mysqli_num_rows($result1);
+ 
+ 
+ 
+   if ($resultCheck1 > 0) {
+     echo "<script type='text/javascript'>
+ 
+     window.alert('The Book is already exist')
+   
+     </script>";
+ }else{
+
+  $db = new dbconnect();
 $query = "INSERT INTO `book` (`bookName`, `author`, `price`, `edition`, `date`, `note`, `activeStatus`) VALUES('".$bookName."', '".$author."', '".$price."', '".$edition."', '".$date."', '".$note."', '".$status."')";
 $db->insertIntoDb($query);
   echo "<script type='text/javascript'>
 
   window.alert('New record created successfully')
 
-  </script>";}
+  </script>";
+
+ }
+
+
+
+
+
+
+
+
+
+}
 } 
 
 
