@@ -59,6 +59,8 @@ $date = "";
 $note = "";
 $status = "";
 $publisher = "";
+$bookNumber = "";
+$code = "";
 
 if(isset($_POST['addBookBTN'])){
    $bookName = $_POST['bookName'];
@@ -68,6 +70,8 @@ if(isset($_POST['addBookBTN'])){
    $date = $_POST['date'];
    $note = $_POST['note'];
    $publisher = $_POST['publisher'];
+   $bookNumber = $_POST['bookNumber'];
+   $code = $_POST['bookCode'];
 
 
    $status = $_POST['gridRadios'];
@@ -100,7 +104,7 @@ if(isset($_POST['addBookBTN'])){
  }else{
 
   $db = new dbconnect();
-$query = "INSERT INTO `book` (`bookName`, `author`, `price`, `edition`, `date`, `publisher`, `note`, `activeStatus`) VALUES('".$bookName."', '".$author."', '".$price."', '".$edition."', '".$date."', '".$publisher."', '".$note."', '".$status."')";
+$query = "INSERT INTO `book` (`bookName`,`bookNumber`, `author`, `price`, `edition`, `date`, `publisher`, `note`, `activeStatus`,`code`) VALUES('".$bookName."', '".$bookNumber."', '".$author."', '".$price."', '".$edition."', '".$date."', '".$publisher."', '".$note."', '".$status."', '".$code."')";
 $db->insertIntoDb($query);
   echo "<script type='text/javascript'>
 
@@ -155,42 +159,54 @@ $db->insertIntoDb($query);
 
               <!-- General Form Elements -->
               <form method = "POST" action="addBook.php">
+              <div class="row mb-3">
+                  <label for="inputText"  class="col-sm-2 col-form-label">Book Number</label>
+                  <div class="col-sm-10">
+                    <input type="text" Name = "bookNumber" class="form-control" placeholder="Book Number">
+                  </div>
+                </div>
                 <div class="row mb-3">
                   <label for="inputText"  class="col-sm-2 col-form-label">Name</label>
                   <div class="col-sm-10">
-                    <input type="text" Name = "bookName" class="form-control">
+                    <input type="text" Name = "bookName" class="form-control" placeholder="Name">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputText"  class="col-sm-2 col-form-label">Code</label>
+                  <div class="col-sm-10">
+                    <input type="text" Name = "bookCode" class="form-control" placeholder="Code">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputEmail" class="col-sm-2 col-form-label">Author</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" Name = "author">
+                    <input type="text" class="form-control" Name = "author" placeholder="Author">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputPassword" class="col-sm-2 col-form-label">Price</label>
                   <div class="col-sm-10">
-                    <input type="number" class="form-control" Name = "price">
+                    <input type="number" class="form-control" Name = "price" placeholder="Price">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputNumber" class="col-sm-2 col-form-label">Edition</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" Name = "edition">
+                    <input type="text" class="form-control" Name = "edition" placeholder="Edition">
                   </div>
                 </div>
 
                 <div class="row mb-3">
                   <label for="inputNumber" class="col-sm-2 col-form-label">Publisher</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" Name = "publisher">
+                    <input type="text" class="form-control" Name = "publisher" placeholder="Publisher">
                   </div>
                 </div>
 
                 <div class="row mb-3">
                   <label for="inputDate" class="col-sm-2 col-form-label">Year</label>
                   <div class="col-sm-10">
-                    <input type="number" class="form-control" Name = "date">
+                    <input type="number" class="form-control" Name = "date" placeholder="Year">
                   </div>
                 </div>
 
