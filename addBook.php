@@ -58,6 +58,7 @@ $edition = "";
 $date = "";
 $note = "";
 $status = "";
+$publisher = "";
 
 if(isset($_POST['addBookBTN'])){
    $bookName = $_POST['bookName'];
@@ -66,6 +67,8 @@ if(isset($_POST['addBookBTN'])){
    $edition = $_POST['edition'];
    $date = $_POST['date'];
    $note = $_POST['note'];
+   $publisher = $_POST['publisher'];
+
 
    $status = $_POST['gridRadios'];
 
@@ -97,7 +100,7 @@ if(isset($_POST['addBookBTN'])){
  }else{
 
   $db = new dbconnect();
-$query = "INSERT INTO `book` (`bookName`, `author`, `price`, `edition`, `date`, `note`, `activeStatus`) VALUES('".$bookName."', '".$author."', '".$price."', '".$edition."', '".$date."', '".$note."', '".$status."')";
+$query = "INSERT INTO `book` (`bookName`, `author`, `price`, `edition`, `date`, `publisher`, `note`, `activeStatus`) VALUES('".$bookName."', '".$author."', '".$price."', '".$edition."', '".$date."', '".$publisher."', '".$note."', '".$status."')";
 $db->insertIntoDb($query);
   echo "<script type='text/javascript'>
 
@@ -178,9 +181,16 @@ $db->insertIntoDb($query);
                 </div>
 
                 <div class="row mb-3">
-                  <label for="inputDate" class="col-sm-2 col-form-label">Date</label>
+                  <label for="inputNumber" class="col-sm-2 col-form-label">Publisher</label>
                   <div class="col-sm-10">
-                    <input type="date" class="form-control" Name = "date">
+                    <input type="text" class="form-control" Name = "publisher">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="inputDate" class="col-sm-2 col-form-label">Year</label>
+                  <div class="col-sm-10">
+                    <input type="number" class="form-control" Name = "date">
                   </div>
                 </div>
 

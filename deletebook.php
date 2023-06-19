@@ -1,5 +1,6 @@
 <?php
 require_once('database/dbConnect.php');
+
 if (!isset($_SESSION)) {
   session_start();
 }

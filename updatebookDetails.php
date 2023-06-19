@@ -64,6 +64,7 @@ $bookId = null;
 $status1 =null; 
 $status2 =null; 
 $status3 =null; 
+$publisher = null;
 
 
 
@@ -81,12 +82,13 @@ if(isset($_POST['update'])){
   $edition = $_POST['edition'];
   $date = $_POST['date'];
   $note = $_POST['note'];
+  $publisher = $_POST['publisher'];
 
   $status = $_POST['gridRadios'];
 
   $db = new dbconnect();
 if(!$bookId == null){
-  $query = "UPDATE `book` SET `bookName`='".$bookName."',`author`='".$author."',`price`='".$price."',`edition`='".$edition."',`date`='".$date."',`note`='".$note."',`activeStatus`='".$status."' WHERE id='".$bookId."'";
+  $query = "UPDATE `book` SET `bookName`='".$bookName."',`author`='".$author."',`price`='".$price."',`publisher`='".$publisher."',`edition`='".$edition."',`date`='".$date."',`note`='".$note."',`activeStatus`='".$status."' WHERE id='".$bookId."'";
     $db->insertIntoDb($query);
 
     echo "<script type='text/javascript'>
@@ -103,6 +105,7 @@ if(!$bookId == null){
     $edition = null;
     $date = null;
     $note = null;
+    $publisher = null;
 }else{    echo "<script type='text/javascript'>
 
   window.alert('Nothing To Update')
@@ -116,7 +119,7 @@ if(!$bookId == null){
 if(isset($_POST['search'])){
   $db = new dbconnect();
   $bookId = $_POST['searchTxt'];
-  $query = "SELECT `id`, `bookName`, `author`, `price`, `edition`, `date`, `note`, `activeStatus` FROM `book` WHERE id = '$bookId'";
+  $query = "SELECT `id`, `bookName`, `author`, `price`, `edition`, `date`, `note`, `activeStatus`, `publisher` FROM `book` WHERE id = '$bookId'";
   $result = $db->getfromdb($query);
   $resultCheck = mysqli_num_rows($result);
 
@@ -135,6 +138,7 @@ if(isset($_POST['search'])){
       $date = $row['date'];
       $note = $row['note'];
       $activeStatus = $row['activeStatus'];
+      $publisher = $row['publisher'];
 
         if($activeStatus == 'active'){
           $status1 = 'checked';
@@ -209,9 +213,16 @@ if(isset($_POST['search'])){
                 </div>
 
                 <div class="row mb-3">
-                  <label for="inputDate" class="col-sm-2 col-form-label" >Date</label>
+                  <label for="inputNumber" class="col-sm-2 col-form-label" >Publisher</label>
                   <div class="col-sm-10">
-                    <input type="date" name="date"  class="form-control" value="<?php echo $date ?>">
+                    <input type="text" name="publisher" class="form-control" placeholder="Publisher" value="<?php  echo $publisher; ?>">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="inputDate" class="col-sm-2 col-form-label" >Year</label>
+                  <div class="col-sm-10">
+                    <input type="number" name="date"  class="form-control" value="<?php echo $date ?>">
                   </div>
                 </div>
 
